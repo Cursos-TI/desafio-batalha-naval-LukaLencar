@@ -49,17 +49,17 @@ int main() {
     }
 
     printf ("\n   *** BATALHA NAVAL *** \n\n");
-    printf ("  ");
+    printf ("     ");
     //Linha horizontal de A até J
     for (horizontal = 0; horizontal < tamTabuleiro; horizontal++){
         printf ("%c ", 'A' + horizontal);
     }
     printf ("\n");
-    printf ("---------------------------------------\n");
+    printf ("    --------------------\n");
 
     //Linha vertical de 1 a 10
     for (vertical = 0; vertical < tamTabuleiro; vertical++){
-        printf ("%2d | "), vertical + 1;
+        printf("%2d | ", vertical + 1);
         for (horizontal = 0; horizontal < tamTabuleiro; horizontal++){
             printf ("%d ", tabuleiro[vertical][horizontal]);
         }
