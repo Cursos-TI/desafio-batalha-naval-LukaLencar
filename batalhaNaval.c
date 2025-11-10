@@ -34,7 +34,7 @@ int main() {
             tabuleiro[linhaH][colunaH + horizontal] = navio;
         }
     } else {
-        printf("Navio fora dos limites do tabuleiro!\n");
+        printf ("Navio fora dos limites do tabuleiro!\n");
         return 0;
     }
 
@@ -48,9 +48,25 @@ int main() {
         return 0;
     }
 
+    printf ("\n   *** BATALHA NAVAL *** \n\n");
+    printf ("  ");
+    //Linha horizontal de A até J
+    for (horizontal = 0; horizontal < tamTabuleiro; horizontal++){
+        printf ("%c ", 'A' + horizontal);
+    }
+    printf ("\n");
+    printf ("---------------------------------------\n");
 
-    
+    //Linha vertical de 1 a 10
+    for (vertical = 0; vertical < tamTabuleiro; vertical++){
+        printf ("%2d | "), vertical + 1;
+        for (horizontal = 0; horizontal < tamTabuleiro; horizontal++){
+            printf ("%d ", tabuleiro[vertical][horizontal]);
+        }
+        printf ("\n");
+    }
 
+    printf ("\nLegenda: Água = 0, Navio = 4\n");
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
     // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
