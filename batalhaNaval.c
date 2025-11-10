@@ -15,11 +15,41 @@ int main() {
 
     int vertical, horizontal;
 
+    // Coordenadas inicias dos navios
+    int linhaH = 2; 
+    int colunaH = 4; 
+    int linhaV = 5;
+    int colunaV = 7;
+
+    //Criação do tabuleiro 10x10 completo com água
     for (vertical = 0; vertical < tamTabuleiro; vertical++){
         for (horizontal = 0; horizontal < tamTabuleiro; horizontal++){
             tabuleiro[vertical][horizontal] = agua;
         }
     }
+
+    //Posicionamento do navio na horizontal
+    if (colunaH + tamNavio <= tamTabuleiro){
+        for (horizontal = 0; horizontal < tamNavio; horizontal++ ){
+            tabuleiro[linhaH][colunaH + horizontal] = navio;
+        }
+    } else {
+        printf("Navio fora dos limites do tabuleiro!\n");
+        return 0;
+    }
+
+    //Posicionamento do navio na vertical
+    if (linhaV + tamNavio <= tamTabuleiro){
+        for (vertical = 0; vertical < tamNavio; vertical++ ){
+            tabuleiro[linhaV + vertical][colunaV] = navio;
+        }
+    } else {
+        printf("Navio fora dos limites do tabuleiro!\n");
+        return 0;
+    }
+
+
+    
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
