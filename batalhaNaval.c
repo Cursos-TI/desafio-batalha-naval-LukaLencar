@@ -40,8 +40,20 @@ int main() {
 
     //Posicionamento do navio na vertical
     if (linhaV + tamNavio <= tamTabuleiro){
+        int sobreposicao = 0;
         for (vertical = 0; vertical < tamNavio; vertical++ ){
-            tabuleiro[linhaV + vertical][colunaV] = navio;
+            if (tabuleiro[linhaV + vertical][colunaV] == navio) {
+                sobreposicao = 1;
+                break;
+            }
+        }
+        if (!sobreposicao){
+            for (vertical = 0; vertical < tamNavio; vertical++){
+                tabuleiro[linhaV + vertical][colunaV] = navio;
+            }
+        } else {
+            printf ("Os navios se sobrepõem!!!\n");
+            return 0;
         }
     } else {
         printf("Navio fora dos limites do tabuleiro!\n");
