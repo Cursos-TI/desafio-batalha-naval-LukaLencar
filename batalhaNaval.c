@@ -9,17 +9,21 @@ int main() {
     int tamTabuleiro = 10;
     int tamNavio = 3;
     int agua = 0;
-    int navio = 4;
+    int navio = 3;
 
     int tabuleiro[10][10]; // Tabuleiro 10x10
 
     int vertical, horizontal;
 
     // Coordenadas inicias dos navios
-    int linhaH = 2; 
-    int colunaH = 4; 
-    int linhaV = 5;
-    int colunaV = 7;
+    int linhaH = 2, colunaH = 4; // Horizontal
+
+    int linhaV = 5, colunaV = 7; // Vertical
+
+    // Coordenadas dos navios diagonais
+    int linhaD1 = 1, colunaD1 = 1; // diagonal principal
+    int linhaD2 = 8, colunaD2 = 2; // diagonal secundária 
+
 
     //Criação do tabuleiro 10x10 completo com água
     for (vertical = 0; vertical < tamTabuleiro; vertical++){
@@ -30,6 +34,12 @@ int main() {
 
     //Posicionamento do navio na horizontal
     if (colunaH + tamNavio <= tamTabuleiro){
+        for (horizontal = 0; horizontal < tamNavio; horizontal++ ){
+            if (tabuleiro[linhaH][colunaH + horizontal] != agua){
+                printf("Sobreposição detectada no navio horizontal!\n");
+                return 0;
+            }
+        }
         for (horizontal = 0; horizontal < tamNavio; horizontal++ ){
             tabuleiro[linhaH][colunaH + horizontal] = navio;
         }
@@ -60,6 +70,53 @@ int main() {
         return 0;
     }
 
+    //Posicionamento do navio na diagonal principal
+    int valido = 1;
+    if (linhaD1 + tamNavio <= tamTabuleiro &&
+        colunaD1 + tamNavio <= tamTabuleiro) {
+
+        for (int i = 0; i < tamNavio; i++) {
+            if (tabuleiro[linhaD1 + i][colunaD1 + i] != agua)
+                valido = 0;
+        }
+
+        if (valido) {
+            for (int i = 0; i < tamNavio; i++)
+                tabuleiro[linhaD1 + i][colunaD1 + i] = navio;
+        } else {
+            printf("Sobreposição detectada no navio diagonal 1!\n");
+            return 0;
+        }
+
+    } else {
+        printf("Navio diagonal 1 fora dos limites!\n");
+        return 0;
+    }
+
+    //Posicionamento do navio na diagonal secundaria
+    valido = 1;
+    if (linhaD2 - (tamNavio - 1) >= 0 &&
+        colunaD2 + tamNavio <= tamTabuleiro) {
+
+        for (int i = 0; i < tamNavio; i++) {
+            if (tabuleiro[linhaD2 - i][colunaD2 + i] != agua)
+                valido = 0;
+        }
+
+        if (valido) {
+            for (int i = 0; i < tamNavio; i++)
+                tabuleiro[linhaD2 - i][colunaD2 + i] = navio;
+        } else {
+            printf("Sobreposição detectada no navio diagonal 2!\n");
+            return 0;
+        }
+
+    } else {
+        printf("Navio diagonal 2 fora dos limites!\n");
+        return 0;
+    }
+
+    //Exibição do tabuleiro
     printf ("\n   *** BATALHA NAVAL *** \n\n");
     printf ("     ");
     //Linha horizontal de A até J
@@ -78,11 +135,8 @@ int main() {
         printf ("\n");
     }
 
-    printf ("\nLegenda: Água = 0, Navio = 4\n");
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+    printf ("\nLegenda: Água = 0, Navio = 3\n");
+    
 
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
